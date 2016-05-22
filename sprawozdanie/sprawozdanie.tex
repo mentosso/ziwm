@@ -1,0 +1,110 @@
+\documentclass[11pt, a4paper, titlepage]{report}
+\linespread{1.2}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{afterpage}
+\usepackage{listings}
+\usepackage{color}
+\frenchspacing
+\addtolength{\textwidth}{3.5cm}
+\addtolength{\hoffset}{-2cm}
+\addtolength{\textheight}{3.5cm}
+\addtolength{\voffset}{-2cm}
+\usepackage{indentfirst}
+\usepackage{caption}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\renewcommand\lstlistlistingname{Spis listingów}
+\lstset{ %
+  language=Matlab,
+	backgroundcolor=\color{white},   % choose the background color
+	basicstyle=\footnotesize,        % size of fonts used for the code
+	breaklines=true,                 % automatic line breaking only at whitespace
+	frame=single,
+	commentstyle=\color{mygreen},    % comment style
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	keywordstyle=\color{blue},       % keyword style
+	stringstyle=\color{mymauve},     % string literal style
+}
+\date{Wrocław, 06.06.2016}
+\makeatletter
+\renewcommand{\maketitle}{\begin{titlepage}
+		\begin{center}\small
+			Politechnika Wrocławska\\
+			Wydział Elektroniki\\
+			Rok akad. 2015/2016\\
+			Kierunek Informatyka\\
+			\vspace{3cm}
+			\rule{\linewidth}{0.4pt}
+				\huge \textsc{\textbf{Komputerowe wspomaganie diagnozowania choroby niedokrwiennej u dzieci z wykorzystaniem algorytmów minimalno-odległościowych}}
+				\vspace{0.5cm} \\
+				\normalsize \textit{Zastosowanie informatyki w medycynie: Projekt}
+			\rule{\linewidth}{0.4pt}
+		\end{center}
+
+		\vspace{3cm}
+		\begin{flushleft}
+			\textbf{\textit{Grupa projektowa:}} \hspace{6.5cm} \textbf{\textit{Prowadzący:}} \\
+			Barłomiej Grzegorek, XXXXXX \hfill{prof. dr hab. inż. Marek Kurzyński} \\
+			Marcin Mantke, 200633\\
+			\vspace{2cm}
+		\end{flushleft}
+		\vspace*{\stretch{6}}
+		\begin{center}
+			\@date
+		\end{center}
+	\end{titlepage}%
+}
+\makeatother
+\begin{document}
+\maketitle
+\tableofcontents
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Spis listingów}
+\lstlistoflistings
+\chapter{Charakterystyka analizowanego problemu}
+\label{chap:Charakterystyka analizowanego problemu}
+
+\chapter{Opis stosowanych algorytmów}
+\label{chap:Opis stosowanych algorytmów}
+
+\chapter{Informacja o środowisku implementacyjnym}
+\label{chap:Informacja o środowisku implementacyjnym}
+
+\chapter{Opis badań eksperymentalnych}
+\label{chap:Opis badań eksperymentalnych}
+
+\chapter{Wyniki badań}
+\label{chap:Wyniki badań}
+
+\chapter{Podsumowanie i wnioski}
+\label{chap:Podsumowanie i wnioski}
+\section{Wnioski płynące z analizy wyników}
+\section{Ocena krytyczna i podsumowanie projektu}
+
+\begin{thebibliography}{}
+\addcontentsline{toc}{chapter}{Bibliografia}
+\bibitem{1}
+M.M. Sysło, N.Deo, J.S. Kowalik, \textit{Algorytmy optymalizacji dyskretnej z programami w języku Pascal}, Wydawnictwo Naukowe PWN , 1999
+
+\bibitem{2}
+R. Neapolitan, K. Naimipour, \textit{Podstawy Algorytmów z przykładami w C++}, Helion, 2004
+
+\bibitem{3}
+T. H. Cormen, C. E. Leiserson, R. L. Rivest, C. Stein, \textit{Wprowadzenie do algorytmów}, Wydawnictwo Naukowe PWN, 2013
+
+\end{thebibliography}
+\end{document}
