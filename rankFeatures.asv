@@ -1,0 +1,9 @@
+function [ indicies, values ] = rankFeatures(matrix)
+numberOfMatrixColumn = 
+featuresRow = getRandomizedGroup();
+[IDX, Z] = rankfeatures(matrix, featuresRow);
+end
+
+function [ vec ] = getRandomizedGroup(numberOfColumns)
+
+end
