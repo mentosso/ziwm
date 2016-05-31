@@ -1,0 +1,8 @@
+\select@language {polish}
+\contentsline {chapter}{Spis rysunk\'ow}{2}{section*.2}
+\contentsline {chapter}{Spis listing\IeC {\'o}w}{3}{section*.4}
+\contentsline {chapter}{\numberline {1}Wst\IeC {\k e}p}{4}{chapter.1}
+\contentsline {chapter}{\numberline {2}Podsumowanie}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Wnioski p\IeC {\l }yn\IeC {\k a}ce z analizy wynik\IeC {\'o}w}{5}{section.2.1}
+\contentsline {section}{\numberline {2.2}Ocena krytyczna i podsumowanie projektu}{5}{section.2.2}
+\contentsline {chapter}{Bibliografia}{6}{chapter*.6}
