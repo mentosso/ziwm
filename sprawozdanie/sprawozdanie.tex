@@ -80,9 +80,100 @@
 
 \chapter{Opis stosowanych algorytmów}
 \label{chap:Opis stosowanych algorytmów}
+\section{Metryka odległości}
+\label{sec:Metryka odległości}
+W algorytmach odległościowych istotną rolę odgrywa wybrana metryka wg której mierzone będzie odległość pomiędzy dwoma badanymi punktami. Spośród wielu wybrane zostały metryka euklidesowa i metryka Manhattan.
+\subsubsection{Metryka euklidesowa}
+\label{subs:Metryka euklidesowa}
+Metryka euklidesowa, w której za odległość między dwoma punktami w przestrzeni przyjmuje się pierwiastek euklidesowego iloczynu skalarnego różnicy dwóch wektorów:
+$$d_e(x,y) = \sqrt{(y-x, x-y)}$$
+Przykład:
+\begin{figure}[h]
+  \includegraphics[scale=0.5]{obrazki/euklides}
+\end{figure}
+\subsubsection{Metryka Manhattan}
+\label{subs:Metryka Manhattan}
+Metryka Manhattan, w której odległość dwóch punktów to suma wartości bezwzględnych różnic ich współrzędnych, zgodnie z poniższym wzorem:
+$$d_m(x,y) = \sum\limits_{k=1}^n |x_k - y_k|$$
+Przykład:
+\begin{figure}[h]
+  \includegraphics[scale=0.5]{obrazki/manhattan}
+\end{figure}
 
-\chapter{Informacja o środowisku implementacyjnym}
-\label{chap:Informacja o środowisku implementacyjnym}
+\section{Algorytm nearest neighbour}
+\label{sec:Algorytm nearest neighbour}
+Algorytm k-NN pozwala wyszukać w zadanym zbiorze punktów, k punktów znajdujących się najbliżej nowego punktu, korzystając przy tym z wybranej miary odległości.\\
+W zagadnieniu klasyfikacji, algorytm k-NN przyjmuje jako argument tzw. zbiór uczący składający się z wielowymiarowych wektorów cech oraz przypisanych do nich klas. Faza klasyfikacji nowego obiektu polega na przypisaniu odpowiedniej klasy nieznanemu wektorowi cech. Nowy obiekt przypisywany jest do klasy, która występuje najczęściej wśród k najbliżej znajdujących się obiektów ze zbioru uczącego, zgodnie z wybraną metryką. Specjalnym przypadkiem algorytmu jest sytuacja, w której $k = 1$. Nazywa się algorytmem najbliższego sąsiada, w którym klasa nowego obiektu ustalana jest na podstawie najbliżej leżącej próbki ze zbioru danych uczących. Na poniższym rysunku przestawiona została przykładowa przestrzeń zawierająca dane uczące (niebieskie kwadraty oraz czerwona trójkąty) oraz niezidentyfikowaną próbkę – zielone kółko):
+\begin{figure}[h]
+  \includegraphics[scale=0.5]{obrazki/knn}
+\end{figure}
+
+Przyjmując liczbę najbliższych sąsiadów $k = 3$ (ciągła linia na rysunku),  nowy obiekt zostanie przypisany do grupy czerwonych trójkątów, ponieważ jest ich więcej wśród 3 najbliższych próbek. Przyjmując $k = 5$, nowy obiekt zostanie przypisany do klasy niebieskich kwadratów, ponieważ w najbliższym otoczeniu znajdują się 3 kwadraty i tylko 2 trójkąty.
+
+\section{Algorytm nearest mean}
+\label{sec:Algorytm nearest mean}
+Algorytm nearest mean jest jednym z algorytmów minimalnoodległościowych. Jest on wykorzystywany w statystyce to prognozowania wartości pewnej zmiennej losowej bądź do zadania klasyfikacji.
+
+Założenia:
+\begin{itemize}
+  \item dany jest zbiór uczący, który zawiera obserwacje. Każda z obserwacji ma przypisany wektor zmiennych objaśniających $X_1...X_n$ oraz wartość zmiennej objaśnianej $Y$,
+  \item dana jest obserwacja $C$ z przypisanym wektorem zmiennch objaśniających $X_1...X_n$ dla której chcemy prognozować wartość zmiennej objaśnianej $Y$.
+\end{itemize}
+
+Przebieg algorytmu:
+\begin{enumerate}
+  \item korzystając ze zbioru uczącego oblicz centroid dla każdej wartości zmiennej objaśnianej $Y$,
+  \item zaklasyfikuj obserwację $C$ do jednej z klas zmiennej objaśnianej $Y$ poprzez minimalizację odległości pomiędzy wektorem wybranych cech, a centroidem.
+\end{enumerate}
+
+\chapter{Implementacja}
+\label{chap:Implementacja}
+\section{Informacja o środowisku implementacyjnym}
+\label{sec:Informacja o środowisku implementacyjnym}
+Algorytmy zostały zaimplementowane w środowisku \textbf{MATLAB}. Ranking cech został uzyskany przy pomocy środowiska \textbf{Orange} (\url{http://orange.biolab.si/}). Jest to rozwiązanie open source, które umożliwia wizualizację oraz analizę~danych.
+\section{Ranking cech}
+\label{sec:Ranking cech}
+Korzystając z narzędzia \textbf{Orange} wygenerowaliśmy ranking cech przedstawiony na rysunku \ref{fig:ranking}.
+\newpage
+\begin{figure}[h]
+  \label{fig:ranking}
+  \includegraphics[scale=0.5]{obrazki/ranking}
+  \caption{Ranking cech.}
+\end{figure}
+
+\section{Implementacja algorytmów}
+\label{sec:Implementacja algorytmów}
+\subsubsection{Nearest mean}
+\label{subs:Nearest mean}
+Na poniższych listingach przedstawione są najważniejsze części programów.
+
+\begin{lstlisting}[label={lst:podzial},caption={Podział danych na zbiór uczący i testowy.}]
+data = data(randperm(end), :);
+train = data(1:floor(0.5*size(data, 1)), :);
+test = data(floor(0.5*size(data, 1))+1:end, :);
+\end{lstlisting}
+
+\begin{lstlisting}[label={lst:centroidy},caption={Etap treningu - wyznaczanie centroidów.}]
+centroid = [unique(data(:, 1)) zeros(size(unique(data(:, 1)), 1), size(data, 2)-1)];
+
+for label = unique(train(:, 1))'
+    % collect all the data of under the label
+    train(train(:, 1) == label, 2:end)
+    % compute the centroid for the label
+    centroid(centroid(:, 1) == label, 2:end) = mean(train(train(:, 1) == label, 2:end));
+
+end
+\end{lstlisting}
+
+\begin{lstlisting}[label={lst:pre_result},caption={Wyznaczenie odległości próbki od centroida i przydzielenie do klasy.}]
+pre_result = zeros(size(test, 1), 1);
+for i = 1:size(test, 1)
+    dist = pdist2(test(i, feature_rank(1:k)), centroid(:, feature_rank(1:k)));
+    [~, templabel] = min(dist);
+    pre_result(i) = centroid(templabel, 1);
+
+end
+\end{lstlisting}
 
 \chapter{Opis badań eksperymentalnych}
 \label{chap:Opis badań eksperymentalnych}
