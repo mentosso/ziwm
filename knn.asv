@@ -1,0 +1,21 @@
+feature_rank = [4, 7, 12, 6, 17, 9, 27, 16, 8, 10, 3, 17, 2, 13, 19];
+data = load('dane.txt');
+data = getBestRankedFeatures(data, feature_rank);
+[train, test] = splitData(data);
+
+% build knn classifier
+Mdl = buildKnnClassifier(train, 5, 1, 'cityblock');
+% Mdl can be now passed to 
+% ClassificationKNN.predict or
+% ClassificationKNN.crossval
+T = test(1:end,2:end);      % test data without class labels
+label = predict(Mdl, T);    % labels for test data predictet with trained classifier
+headers = {'result' 'original'};
+result = [label, test(:,1)];
+%result = [headers, result];
+result=[headers;num2cell(result)];
+
+sum = 0;
+for i = 2:size(result)
+   fprintf('%dresult(i)
+end
