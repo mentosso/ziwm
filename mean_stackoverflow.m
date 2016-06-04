@@ -86,4 +86,6 @@ for i = 1:ilosc_probek
 end
 hold on
 plot(1:ilosc_probek, final_percentage_manhattan, 'color', 'green');
+xlabel('ilość cech'), ylabel('dokładność [%]'), grid on
+set(gca, 'xtick', 1:1:ilosc_probek)
 

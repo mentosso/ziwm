@@ -81,7 +81,7 @@
 \chapter{Opis stosowanych algorytmów}
 \label{chap:Opis stosowanych algorytmów}
 \section{Metryka odległości}
-\label{sec:Metryka odległości}
+\label{sec:Metryka odległosci}
 W algorytmach odległościowych istotną rolę odgrywa wybrana metryka wg której mierzone będzie odległość pomiędzy dwoma badanymi punktami. Spośród wielu wybrane zostały metryka euklidesowa i metryka Manhattan.
 \subsubsection{Metryka euklidesowa}
 \label{subs:Metryka euklidesowa}
@@ -89,7 +89,9 @@ Metryka euklidesowa, w której za odległość między dwoma punktami w przestrz
 $$d_e(x,y) = \sqrt{(y-x, x-y)}$$
 Przykład:
 \begin{figure}[h]
+  \centering
   \includegraphics[scale=0.5]{obrazki/euklides}
+  \caption{Przykład obliczania metryki eukliesowej.}
 \end{figure}
 \subsubsection{Metryka Manhattan}
 \label{subs:Metryka Manhattan}
@@ -97,15 +99,19 @@ Metryka Manhattan, w której odległość dwóch punktów to suma wartości bezw
 $$d_m(x,y) = \sum\limits_{k=1}^n |x_k - y_k|$$
 Przykład:
 \begin{figure}[h]
+  \centering
   \includegraphics[scale=0.5]{obrazki/manhattan}
+  \caption{Przykład obliczania metryki manhattan.}
 \end{figure}
 
 \section{Algorytm nearest neighbour}
 \label{sec:Algorytm nearest neighbour}
 Algorytm k-NN pozwala wyszukać w zadanym zbiorze punktów, k punktów znajdujących się najbliżej nowego punktu, korzystając przy tym z wybranej miary odległości.\\
-W zagadnieniu klasyfikacji, algorytm k-NN przyjmuje jako argument tzw. zbiór uczący składający się z wielowymiarowych wektorów cech oraz przypisanych do nich klas. Faza klasyfikacji nowego obiektu polega na przypisaniu odpowiedniej klasy nieznanemu wektorowi cech. Nowy obiekt przypisywany jest do klasy, która występuje najczęściej wśród k najbliżej znajdujących się obiektów ze zbioru uczącego, zgodnie z wybraną metryką. Specjalnym przypadkiem algorytmu jest sytuacja, w której $k = 1$. Nazywa się algorytmem najbliższego sąsiada, w którym klasa nowego obiektu ustalana jest na podstawie najbliżej leżącej próbki ze zbioru danych uczących. Na poniższym rysunku przestawiona została przykładowa przestrzeń zawierająca dane uczące (niebieskie kwadraty oraz czerwona trójkąty) oraz niezidentyfikowaną próbkę – zielone kółko):
+W zagadnieniu klasyfikacji, algorytm k-NN przyjmuje jako argument tzw. zbiór uczący składający się z wielowymiarowych wektorów cech oraz przypisanych do nich klas. Faza klasyfikacji nowego obiektu polega na przypisaniu odpowiedniej klasy nieznanemu wektorowi cech. Nowy obiekt przypisywany jest do klasy, która występuje najczęściej wśród k najbliżej znajdujących się obiektów ze zbioru uczącego, zgodnie z wybraną metryką. Specjalnym przypadkiem algorytmu jest sytuacja, w której $k = 1$. Nazywa się algorytmem najbliższego sąsiada, w którym klasa nowego obiektu ustalana jest na podstawie najbliżej leżącej próbki ze zbioru danych uczących. Na poniższym rysunku przestawiona została przykładowa przestrzeń zawierająca dane uczące (niebieskie kwadraty oraz czerwona trójkąty) oraz niezidentyfikowaną próbkę – zielone kółko):
 \begin{figure}[h]
+  \centering
   \includegraphics[scale=0.5]{obrazki/knn}
+  \caption{Klasyfikacja w algorytmie k-nn.}
 \end{figure}
 
 Przyjmując liczbę najbliższych sąsiadów $k = 3$ (ciągła linia na rysunku),  nowy obiekt zostanie przypisany do grupy czerwonych trójkątów, ponieważ jest ich więcej wśród 3 najbliższych próbek. Przyjmując $k = 5$, nowy obiekt zostanie przypisany do klasy niebieskich kwadratów, ponieważ w najbliższym otoczeniu znajdują się 3 kwadraty i tylko 2 trójkąty.
@@ -157,11 +163,10 @@ test = data(floor(0.5*size(data, 1))+1:end, :);
 centroid = [unique(data(:, 1)) zeros(size(unique(data(:, 1)), 1), size(data, 2)-1)];
 
 for label = unique(train(:, 1))'
-    % collect all the data of under the label
+    % zbierz wszystkie próbki danej klasy
     train(train(:, 1) == label, 2:end)
-    % compute the centroid for the label
+    % oblicz centroid dla danej klasy
     centroid(centroid(:, 1) == label, 2:end) = mean(train(train(:, 1) == label, 2:end));
-
 end
 \end{lstlisting}
 
@@ -171,15 +176,27 @@ for i = 1:size(test, 1)
     dist = pdist2(test(i, feature_rank(1:k)), centroid(:, feature_rank(1:k)));
     [~, templabel] = min(dist);
     pre_result(i) = centroid(templabel, 1);
-
 end
 \end{lstlisting}
 
 \chapter{Opis badań eksperymentalnych}
 \label{chap:Opis badań eksperymentalnych}
-
-\chapter{Wyniki badań}
+Badania eksperymentalne zostały przeprowadzone zgodnie z instrukcją. Zastosowano trenowanie i testowanie klasyfikatorów z wykorzystaniem 5 razy powtarzanej metody 2-krotnej walidacji krzyżowej. Zastosowane miary odległości to miara euklidesowa i Manhattan.
+\section{Wyniki badań}
 \label{chap:Wyniki badań}
+\subsection{Algorytm nearest mean}
+\label{subs:Algorytm nearest mean}
+Wyniki badań dla algorytmu nearest mean zostały przedstawione na rysunku \ref{fig:nm_res}.
+
+\begin{figure}[h]
+  \centering
+  \label{fig:nm_res}
+  \includegraphics[scale=0.4]{obrazki/nm_plot}
+  \caption{Wynik badań dla algorytmu nearest mean.}
+\end{figure}
+
+Jak widać na rysunku, dokładność klasyfikacji rośnie wraz ze zwiększaniem liczby cech biorącej udział w klasyfikacji. Największy skok dokładności występuje przy wykorzystaniu 11 cech (różnica na poziomie 40\%). Kolejne zwiększanie ilości cech utrzymuje dokładność klasyfikacji na względnie równym poziomie (nie ma dużych wzrostów ani spadków dokładności klasyfikacji).\\
+Z rysunku można również odczytać, że wpływ na dokładność klasyfikacji ma wybrana metryka. Od momentu dołożenia 11 cechy, czyli największego wzrostu dokładności klasyfikacji, klasyfikacja dla metryki euklidesowej jest średnio 25-30\% gorsza od metryki Manhattan.
 
 \chapter{Podsumowanie i wnioski}
 \label{chap:Podsumowanie i wnioski}
