@@ -1,6 +1,6 @@
 function [ count, percentage ] = getScore( classifier, testData )
-    T = testData(1:end,2:end);      % test data without class labels
-    label = predict(classifier, T);        % labels for test data predictet with trained classifier
+    T = testData(1:end,2:end);             % test data without class labels
+    label = predict(classifier, T);        % predicted classes
     result = [label, testData(:,1)];
     count = 0;
     for i = 1:size(result,1)

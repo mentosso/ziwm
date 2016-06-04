@@ -1,11 +1,12 @@
-function [ percentage ] = knn( features, neighbors, standardize, distanceMetric )
-    feature_rank = [4, 7, 12, 6, 17, 9, 27, 16, 8, 10, 3, 17, 2, 13, 19];
+function [ result ] = knn( features, neighbors, standardize, distanceMetric )
+    feature_rank = [6, 11, 3, 8, 5, 15, 12, 2, 7, 26, 1, 17, 13, 25, 9, 4, 14, 23, 16, 19, 30, 10, 27, 18, 28, 24, 20, 22, 21, 29, 31];
     data = load('dane.txt');
     data = getBestRankedFeatures(data, feature_rank(1:features));
-    [train, test] = splitData(data);
-
+    
     result = 0;
-    for n = 1 : 5
+   N = 5;
+    for i = 1 : N
+    [train, test] = splitDataRandomly(data);
         Mdl = buildKnnClassifier(train, neighbors, standardize, distanceMetric);
         [count, percentage] = getScore(Mdl, test);
 
@@ -14,5 +15,5 @@ function [ percentage ] = knn( features, neighbors, standardize, distanceMetric 
 
         result = result + (percentage + percentage1) / 2;
     end
-    result = result / 5;
+    result = result / N;
 end
