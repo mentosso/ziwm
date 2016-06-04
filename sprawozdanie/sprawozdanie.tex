@@ -52,7 +52,7 @@
 		\vspace{3cm}
 		\begin{flushleft}
 			\textbf{\textit{Grupa projektowa:}} \hspace{6.5cm} \textbf{\textit{Prowadzący:}} \\
-			Barłomiej Grzegorek, XXXXXX \hfill{prof. dr hab. inż. Marek Kurzyński} \\
+			Barłomiej Grzegorek, 200814 \hfill{prof. dr hab. inż. Marek Kurzyński} \\
 			Marcin Mantke, 200633\\
 			\vspace{2cm}
 		\end{flushleft}
@@ -195,7 +195,7 @@ function [ result ] = knn( features, neighbors, standardize, distanceMetric )
 end
 \end{lstlisting}
 
-Ranking cech, którego sposób wyznaczenia opisany został w rozdziale XXX, przechowywany jest w wektorze \textit{feature\_rank}. Pierwszym krokiem algorytmu jest załadowanie danych wejściowych wraz z przypisanymi do nich klasami oraz wybranie z nich podanej w parametrze liczby najlepszych cech.
+Ranking cech, którego sposób wyznaczenia opisany został w rozdziale \ref{sec:Ranking cech}, przechowywany jest w wektorze \textit{feature\_rank}. Pierwszym krokiem algorytmu jest załadowanie danych wejściowych wraz z przypisanymi do nich klasami oraz wybranie z nich podanej w parametrze liczby najlepszych cech.
 Następnie w wykonującej się pięciokrotnie pętli, wyselekcjonowane dane dzielone są losowo na 2 równe podzbiory – uczący(train) oraz testujący(test), na podstawie których budowane są 2 klasyfikatory. Poniżej przedstawiona została implementacja funkcji wykorzystanej do budowy klasyfikatora:\\
 
 \begin{lstlisting}[label={lst:knn_klasyfikator},caption={Budowa klasyfikatora kNN.}]
