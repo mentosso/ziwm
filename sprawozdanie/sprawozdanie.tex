@@ -77,6 +77,22 @@
 \lstlistoflistings
 \chapter{Charakterystyka analizowanego problemu}
 \label{chap:Charakterystyka analizowanego problemu}
+Poruszany w niniejszej pracy problem dotyczy wspomagania diagnozowania choroby niedokrwiennej u  dzieci z wykorzystaniem algorytmów minimalno-odległościowych. Główną częścią pracy jest analiza problemu klasyfikacji, na podstawie udostępnionych danych. Najważniejszym zadaniem klasyfikacji jest zbudowanie modelu, który będzie w stanie przypisywać nowe obiekty, do znanych już klas. Do tego celu wykorzystywane są zebrane wcześniej dane, stanowiące tzw. zbiór treningowy.\\
+
+Do badań wykorzystane zostały dane zawierające 410 obiektów o znanych klasach– które w tym przypadku odzwierciedlają rozpoznane rodzaje choroby niedokrwiennej. Wyróżnionych zostało 20 różnych jednostek chorobowych. Każdy z obiektów opisany jest łącznie za pomocą 32 cech, które oznaczają wyniki badań pojedynczego pacjenta. Cechy zostały podzielone na grupy opisujące odpowiednio:
+\begin{itemize}
+  \item obraz krwi,
+  \item obraz szpiku,
+  \item stan komórki,
+  \item osocze,
+  \item test odpornościowy,
+  \item test urobylinowy, urobilinogenowy, urobilirubinowy,
+  \item test ruchliwości komórki,
+  \item wrażenia kliniczne.
+\end{itemize}
+
+Podane cechy mają charakter dyskretny oraz są wielowartościowe – w zależności od rodzaju mogą przyjmować od 2(cechy binarne) do 6 różnych wartości.\\
+Podczas badań przetestowana została jakość klasyfikacji obiektów w zależności od różnych parametrów budowy klasyfikatora, np. różne rodzaje pomiaru odległości.
 
 \chapter{Opis stosowanych algorytmów}
 \label{chap:Opis stosowanych algorytmów}
